@@ -19,6 +19,8 @@ export default {
       fontFamily: {
         sans: ['Inter', 'Vazirmatn', 'system-ui', 'sans-serif'],
         fa: ['Vazirmatn', 'Inter', 'system-ui', 'sans-serif'],
+        script: ['"Great Vibes"', '"Cormorant Garamond"', 'cursive'],
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
       },
       boxShadow: {
         panel: '0 30px 70px -40px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.035)',

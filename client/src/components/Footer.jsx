@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Send, Youtube, Instagram, Twitter } from 'lucide-react';
 import { LogoMark } from './Brand.jsx';
 import { MountainScene } from './Art.jsx';
+import { GoldDivider } from './Ornament.jsx';
 import { useLang } from '../lib/lang.jsx';
 
 const LEGAL = [
@@ -22,28 +23,28 @@ export default function Footer() {
   const { L } = useLang();
 
   return (
-    <footer className="relative mt-10 overflow-hidden border-t border-gold/10">
-      <MountainScene className="pointer-events-none absolute inset-x-0 bottom-0 h-[230px] w-full opacity-90" />
-      <div className="relative mx-auto max-w-[1600px] px-4 pb-8 pt-10 sm:px-6">
+    <footer className="relative mt-12 overflow-hidden border-t border-gold/25 bg-[#050506]">
+      <MountainScene className="pointer-events-none absolute inset-x-0 bottom-0 h-[230px] w-full opacity-40" />
+      <div className="gold-rule absolute inset-x-0 top-0 h-px" />
+
+      <div className="relative mx-auto max-w-[1600px] px-4 pb-7 pt-9 sm:px-6">
         <div className="grid gap-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5">
               <LogoMark size={40} />
               <div>
                 <p className="gold-text text-base font-extrabold tracking-[0.24em]">RENA</p>
-                <p className="text-[9px] uppercase tracking-[0.28em] text-mute/60">TRADING COUPLE</p>
+                <p className="text-[9px] uppercase tracking-[0.28em] text-gold/50">TRADING COUPLE</p>
               </div>
             </div>
-            <p className="mt-3 max-w-sm text-[13px] leading-relaxed text-mute">
+            <p className="mt-3 max-w-sm text-[12.5px] leading-relaxed text-mute/85">
               {L(
                 'با هم، به سوی آزادی مالی — پلتفرم معاملاتی RENA با زیرساخت امن، گزارش شفاف و پشتیبانی همیشگی.',
                 'Together towards financial freedom — the RENA trading platform with a secure infrastructure, transparent reporting and constant support.',
               )}
             </p>
-            <p className="mt-3 text-[10px] font-medium uppercase tracking-[0.3em] text-gold/70">
-              {L('دو ذهن • یک چشم‌انداز', 'Two minds • one vision')}
-            </p>
-            <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-mute/50">
+            <p className="font-script mt-3 text-[22px] leading-tight text-gold/85">Two Minds · One Vision</p>
+            <p className="text-[9px] font-medium uppercase tracking-[0.34em] text-mute/45">
               Trade together • Grow together
             </p>
 
@@ -60,7 +61,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={social.label}
-                  className="rounded-lg border border-gold/20 bg-white/[0.03] p-2 text-mute transition hover:border-gold/50 hover:text-gold"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/25 bg-black/40 text-gold/70 transition hover:border-gold/60 hover:text-gold"
                 >
                   <social.icon size={14} />
                 </a>
@@ -69,13 +70,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
+            <p className="mb-3 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-gold/80">
               {L('خدمات', 'Services')}
             </p>
             <ul className="space-y-2">
               {LINKS.map((link) => (
                 <li key={link.to}>
-                  <Link to={link.to} className="text-[12.5px] text-mute transition hover:text-gold">
+                  <Link to={link.to} className="text-[12px] text-mute/85 transition hover:text-gold">
                     {L(link.fa, link.en)}
                   </Link>
                 </li>
@@ -84,13 +85,13 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
+            <p className="mb-3 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-gold/80">
               {L('قوانین', 'Legal')}
             </p>
             <ul className="space-y-2">
               {LEGAL.map((link) => (
                 <li key={link.to}>
-                  <Link to={link.to} className="text-[12.5px] text-mute transition hover:text-gold">
+                  <Link to={link.to} className="text-[12px] text-mute/85 transition hover:text-gold">
                     {L(link.fa, link.en)}
                   </Link>
                 </li>
@@ -99,10 +100,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
+            <p className="mb-3 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-gold/80">
               {L('ارتباط', 'Contact')}
             </p>
-            <ul className="space-y-2 text-[12.5px] text-mute">
+            <ul className="space-y-2 text-[12px] text-mute/85">
               <li>support@rena.gold</li>
               <li dir="ltr">+98 21 0000 0000</li>
               <li>
@@ -114,7 +115,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-2 border-t border-white/[0.07] pt-4 text-[11px] text-mute/60 sm:flex-row sm:items-center sm:justify-between">
+        <GoldDivider className="mt-8" />
+
+        <div className="mt-4 flex flex-col gap-2 text-[10.5px] text-mute/55 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} RENA TRADING COUPLE. {L('تمام حقوق محفوظ است.', 'All rights reserved.')}</p>
           <p className="max-w-xl leading-relaxed">
             {L(

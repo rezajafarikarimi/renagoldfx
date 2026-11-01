@@ -165,6 +165,25 @@
 }
 
 @layer utilities {
+  .font-script {
+    font-family: 'Great Vibes', 'Cormorant Garamond', cursive;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .font-serif-gold {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: 0.04em;
+  }
+
+  .ornate-panel {
+    background-image: linear-gradient(180deg, rgba(20, 16, 10, 0.92), rgba(8, 8, 9, 0.94));
+  }
+
+  .gold-rule {
+    background-image: linear-gradient(90deg, transparent, rgba(232, 182, 78, 0.55), transparent);
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
