@@ -4,6 +4,7 @@ import { Menu, Globe2, ChevronDown, LayoutDashboard, ShieldCheck, LogOut } from 
 import { Brand } from './Brand.jsx';
 import { useLang } from '../lib/lang.jsx';
 import { useAuth } from '../lib/auth.jsx';
+import ReferenceArt from './ReferenceArt.jsx';
 
 export const NAV_LINKS = [
   { to: '/', key: 'home', fa: 'صفحه اصلی', en: 'Home' },
@@ -17,7 +18,7 @@ export const NAV_LINKS = [
   { to: '/faq', key: 'faq', fa: 'سوالات متداول', en: 'FAQ' },
 ];
 
-function LanguageSwitcher() {
+function LanguageSwitcher({ reference = false }) {
   const { lang, setLang, L } = useLang();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -40,7 +41,7 @@ function LanguageSwitcher() {
         aria-expanded={open}
         aria-label={L('تغییر زبان', 'Change language')}
       >
-        <Globe2 size={14} />
+        {reference ? <span aria-hidden="true" className="text-lg">{lang === 'fa' ? '🇮🇷' : '🌐'}</span> : <Globe2 size={14} />}
         <span className="text-[11px] font-semibold">{lang === 'fa' ? 'FA' : 'EN'}</span>
         <ChevronDown size={12} />
       </button>
@@ -76,7 +77,7 @@ function LanguageSwitcher() {
   );
 }
 
-export default function Header({ onOpenMenu }) {
+export default function Header({ onOpenMenu, reference = false }) {
   const { L } = useLang();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ export default function Header({ onOpenMenu }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gold/10 bg-ink/85 backdrop-blur-xl">
+    <header className={`${reference ? 'reference-header' : ''} sticky top-0 z-50 border-b border-gold/10 bg-ink/85 backdrop-blur-xl`}>
       <div className="mx-auto flex h-16 max-w-[1600px] items-center gap-2 px-3 sm:px-5">
         <button
           type="button"
@@ -98,7 +99,7 @@ export default function Header({ onOpenMenu }) {
           <Menu size={17} />
         </button>
 
-        <Brand />
+        {reference ? <Link to="/" aria-label="RENA TRADING COUPLE"><ReferenceArt region="logo" className="h-11 w-11" /></Link> : <Brand />}
 
         <nav className="mx-2 hidden flex-1 items-center gap-0.5 xl:flex">
           {NAV_LINKS.map((link) => (
@@ -113,8 +114,8 @@ export default function Header({ onOpenMenu }) {
           ))}
         </nav>
 
-        <div className="ms-auto flex items-center gap-2">
-          <LanguageSwitcher />
+        <div className="header-actions ms-auto flex items-center gap-2">
+          <LanguageSwitcher reference={reference} />
 
           {user ? (
             <div className="flex items-center gap-2">

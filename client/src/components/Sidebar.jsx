@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   LifeBuoy,
   PhoneCall,
+  Headset,
   X,
   Layers,
   Settings,
@@ -22,6 +23,7 @@ import { useLang } from '../lib/lang.jsx';
 import { useAuth } from '../lib/auth.jsx';
 import { LogoMark } from './Brand.jsx';
 import { StatusBadge } from './ui.jsx';
+import ReferenceArt from './ReferenceArt.jsx';
 
 const USER_ITEMS = [
   { to: '/dashboard', end: true, icon: LayoutDashboard, fa: 'داشبورد', en: 'Dashboard' },
@@ -103,7 +105,7 @@ function ProfileCard({ variant }) {
   );
 }
 
-function SidebarPanel({ variant, onNavigate }) {
+function SidebarPanel({ variant, onNavigate, reference = false }) {
   const { L } = useLang();
   const { user } = useAuth();
   const items = variant === 'admin' ? ADMIN_ITEMS : USER_ITEMS;
@@ -111,15 +113,17 @@ function SidebarPanel({ variant, onNavigate }) {
 
   return (
     <div className="panel overflow-hidden">
-      <div className="flex items-center gap-2 border-b border-white/[0.06] px-3.5 py-3">
-        <LogoMark size={26} />
-        <div className="leading-none">
-          <p className="gold-text text-[11px] font-extrabold tracking-[0.22em]">RENA</p>
-          <p className="mt-0.5 text-[8px] uppercase tracking-[0.24em] text-mute/60">
-            {variant === 'admin' ? L('پنل مدیریت', 'Admin panel') : L('پنل کاربری', 'Member area')}
-          </p>
+      {reference ? <Link to="/" onClick={onNavigate} className="reference-sidebar-brand" aria-label="RENA TRADING COUPLE"><ReferenceArt region="logo" /></Link> : (
+        <div className="flex items-center gap-2 border-b border-white/[0.06] px-3.5 py-3">
+          <LogoMark size={26} />
+          <div className="leading-none">
+            <p className="gold-text text-[11px] font-extrabold tracking-[0.22em]">RENA</p>
+            <p className="mt-0.5 text-[8px] uppercase tracking-[0.24em] text-mute/60">
+              {variant === 'admin' ? L('پنل مدیریت', 'Admin panel') : L('پنل کاربری', 'Member area')}
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="p-2.5">
         <ProfileCard variant={variant} />
@@ -132,7 +136,7 @@ function SidebarPanel({ variant, onNavigate }) {
             to={item.to}
             end={item.end}
             onClick={onNavigate}
-            className={({ isActive }) => `side-link mb-0.5 ${isActive ? 'side-link-active' : ''}`}
+            className={({ isActive }) => `side-link mb-0.5 ${isActive || (reference && item.to === '/dashboard') ? 'side-link-active' : ''}`}
           >
             <item.icon size={15} strokeWidth={1.7} className="shrink-0" />
             <span className="truncate">{L(item.fa, item.en)}</span>
@@ -152,7 +156,7 @@ function SidebarPanel({ variant, onNavigate }) {
       <div className="m-2.5 rounded-xl border border-gold/25 bg-gradient-to-br from-gold/[0.12] to-transparent p-3">
         <div className="flex items-center gap-2">
           <span className="rounded-lg border border-gold/30 bg-gold/10 p-1.5 text-gold">
-            <PhoneCall size={14} />
+            {reference ? <Headset size={14} /> : <PhoneCall size={14} />}
           </span>
           <div>
             <p className="text-[11.5px] font-semibold">{L('پشتیبانی آنلاین', 'Live support')}</p>
@@ -167,19 +171,19 @@ function SidebarPanel({ variant, onNavigate }) {
   );
 }
 
-export default function Sidebar({ variant = 'public', open, onClose }) {
+export default function Sidebar({ variant = 'public', open, onClose, reference = false }) {
   const { L } = useLang();
 
   return (
     <>
       <aside className="hidden w-[250px] shrink-0 py-6 lg:block">
         <div className="sticky top-[84px] max-h-[calc(100vh-100px)] overflow-y-auto no-scrollbar">
-          <SidebarPanel variant={variant} />
+          <SidebarPanel variant={variant} reference={reference} />
         </div>
       </aside>
 
       {open ? (
-        <div className="fixed inset-0 z-[80] lg:hidden">
+        <div className={`${reference ? 'reference-drawer' : ''} fixed inset-0 z-[80] lg:hidden`}>
           <button
             type="button"
             aria-label="close menu"
@@ -201,7 +205,7 @@ export default function Sidebar({ variant = 'public', open, onClose }) {
               </button>
             </div>
 
-            <SidebarPanel variant={variant} onNavigate={onClose} />
+            <SidebarPanel variant={variant} reference={reference} onNavigate={onClose} />
 
             <div className="mt-3 rounded-xl border border-white/10 p-2">
               <p className="px-1 pb-1 text-[10px] uppercase tracking-[0.2em] text-mute/50">

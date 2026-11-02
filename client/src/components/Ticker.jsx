@@ -8,7 +8,7 @@ function TickerItem({ item }) {
   const neutral = item.change === null || item.price === null;
   return (
     <div className="flex items-center gap-2 border-e border-white/[0.06] px-4 py-1.5">
-      <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/80">
+      <span className="ticker-symbol text-[10px] font-semibold uppercase tracking-[0.14em] text-white/80" data-symbol={item.symbol}>
         {item.symbol}
       </span>
       <span className={`text-[11px] tabular-nums ${neutral ? 'text-mute/70' : 'text-white/90'}`}>
@@ -63,7 +63,7 @@ export default function Ticker() {
   const duplicated = track.length ? [...track, ...track] : [];
 
   return (
-    <div className="border-b border-white/[0.06] bg-[#040506]" dir="ltr">
+    <div className="market-ticker border-b border-white/[0.06] bg-[#040506]" dir="ltr">
       <div className="mx-auto flex h-9 max-w-[1600px] items-center gap-3 px-3 sm:px-5">
         <div className="flex shrink-0 items-center gap-1.5 border-e border-white/[0.06] pe-3">
           <span className="relative flex h-1.5 w-1.5">

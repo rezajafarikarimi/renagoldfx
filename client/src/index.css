@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-ink text-white antialiased;
+    font-family: 'Inter', 'Vazirmatn', system-ui, sans-serif;
+    background-image:
+      radial-gradient(55% 45% at 12% -8%, rgba(232, 182, 78, 0.1), transparent 68%),
+      radial-gradient(45% 40% at 100% 0%, rgba(232, 182, 78, 0.06), transparent 70%),
+      radial-gradient(60% 60% at 50% 120%, rgba(153, 112, 44, 0.08), transparent 70%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  html[dir='rtl'] body {
+    font-family: 'Vazirmatn', 'Inter', system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: rgba(232, 182, 78, 0.28);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(232, 182, 78, 0.22);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(232, 182, 78, 0.4);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgba(232, 182, 78, 0.65);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-gold/15 bg-card/80 shadow-panel;
+  }
+
+  .panel-lift {
+    @apply transition duration-300 hover:-translate-y-1 hover:border-gold/45 hover:shadow-gold;
+  }
+
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition duration-200 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-gold {
+    color: #171003;
+    background-image: linear-gradient(180deg, #ffd777, #e8b64e 55%, #c7912f);
+    box-shadow: 0 16px 34px -20px rgba(232, 182, 78, 0.85);
+  }
+  .btn-gold:hover {
+    filter: brightness(1.07);
+    box-shadow: 0 18px 40px -18px rgba(232, 182, 78, 0.95);
+  }
+
+  .btn-ghost {
+    @apply border border-gold/30 text-gold;
+  }
+  .btn-ghost:hover {
+    @apply border-gold/60 bg-gold/10;
+  }
+
+  .btn-soft {
+    @apply border border-white/10 bg-white/[0.04] text-white;
+  }
+  .btn-soft:hover {
+    @apply border-white/20 bg-white/[0.08];
+  }
+
+  .btn-danger {
+    @apply border border-down/30 bg-down/10 text-down;
+  }
+  .btn-danger:hover {
+    @apply border-down/60 bg-down/20;
+  }
+
+  .btn-sm {
+    @apply rounded-lg px-3 py-1.5 text-xs;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-[#07090B] px-3.5 py-2.5 text-sm text-white transition placeholder:text-mute/40 focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/15;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-medium text-mute;
+  }
+
+  .gold-text {
+    background-image: linear-gradient(118deg, #ffd777, #e8b64e 46%, #bd8f3d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hairline {
+    @apply border-t border-white/[0.06];
+  }
+
+  .grid-glow {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(70% 70% at 50% 40%, #000 30%, transparent 78%);
+  }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 46s linear infinite;
+  }
+  .ticker-mask:hover .ticker-track {
+    animation-play-state: paused;
+  }
+
+  .table-head {
+    @apply text-[11px] font-medium uppercase tracking-[0.08em] text-mute/60;
+  }
+
+  .nav-link {
+    @apply rounded-lg px-2.5 py-2 text-[13px] text-mute transition hover:bg-white/5 hover:text-white;
+  }
+  .nav-link-active {
+    @apply bg-gold/10 text-gold;
+  }
+
+  .side-link {
+    @apply flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 text-[13px] text-mute transition hover:border-gold/20 hover:bg-white/[0.04] hover:text-white;
+  }
+  .side-link-active {
+    @apply border-gold/35 bg-gold/10 text-gold shadow-[inset_0_0_18px_rgba(232,182,78,0.08)];
+  }
+
+  .stat-card {
+    @apply panel relative overflow-hidden p-4;
+  }
+
+  .chip-gold {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-2.5 py-1 text-[11px] font-medium text-gold;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
